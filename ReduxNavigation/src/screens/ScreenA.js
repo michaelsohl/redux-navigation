@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 import { View, Text, Button } from 'react-native'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux' 
 
-export default class ScreenA extends Component {
-  
-  onPress = () => {
+class ScreenA extends Component {
+
+  _onPress = () => {
     console.log('SA button press')
     this.props.navigation.navigate('Sb', { replace: true })
+
   }
 
   componentDidMount () {
@@ -14,10 +17,33 @@ export default class ScreenA extends Component {
 
   render(){
     console.log('ScreenA')
+     const { onPress, counter } = this.props
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'green'}} >
-        <Button onPress={ this.onPress } style={{height: 100, width: 200}} title='button' color='#C21807'/>
+        <Button onPress={ onPress } style={{height: 100, width: 200}} title={`${counter}`} color='#C21807'/>
       </View>
     )
   }
 }
+const mapStateToProps = (state) => {
+  return {
+    counter: state.counter
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onPress: () => {
+      dispatch({
+        type: 'INCR_COUNTER'
+      })
+    }        
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ScreenA)
+
+// title={`${this.state.}Counter`}

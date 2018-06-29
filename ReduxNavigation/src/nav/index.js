@@ -1,10 +1,9 @@
-import { StackNavigator } from 'react-navigation'
+import { createStackNavigator, addNavigationHelpers } from 'react-navigation'
 import ScreenA from '../screens/ScreenA'
 import ScreenB from '../screens/ScreenB'
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 
-const Navigator = StackNavigator({
+export default createStackNavigator({
   Sa: { screen: ScreenA },
   Sb: { screen: ScreenB }
 },
@@ -12,22 +11,10 @@ const Navigator = StackNavigator({
   initialRouteName: 'Sa'
 })
 
-class Nav extends Component {
+/** 
+export default class Nav extends Component {
   render() {
-    return(
-      <Navigator />
-    )
-  }
-}
-
-const mapStateToProps = state => ({
-  navigation: state.navigation,
-})
-
-export default Nav
-/**
- * class Nav extends Component {
-  render() {
+    console.log('navigator state:', this.props.state)
     return(
       <Navigator navigation={addNavigationHelpers({
         dispatch: this.props.dispatch,
@@ -36,10 +23,4 @@ export default Nav
     )
   }
 }
-
-const mapStateToProps = state => ({
-  navigation: state.navigation,
-})
-
-export default connect(mapStateToProps)(Nav)
- */
+*/

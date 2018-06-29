@@ -5,46 +5,39 @@ const defaultCounter = {
 }
 
 import { NavigationActions } from 'react-navigation'
-import Navigator from '../nav'
+import AppNavigator  from '../nav'
+import {
+  createReactNavigationReduxMiddleware,
+  createNavigationReducer,
+} from 'react-navigation-redux-helpers'
+import { logger } from 'redux-logger'
 
-// const initialAction = { type: NavigationActions.Init }
-// con sole.log('initialACtion:', initialAction)
-// const initialState = Navigator.router.getStateForAction(initialAction)
 
-const navReducer = function (state = initialState, action) {
-  console.log('prev state:', state)
-  let newState = Navigator.router.getStateForAction(action, state)
-  console.log('newState:', newState)
-  if (action.params && action.params.replace) {
-    // In order to replace the previous route
-    // we'll remove the item at index - 1 and then decrement the index.
+const navReducer = createNavigationReducer(AppNavigator)
 
-    /**
-     * const { index } = newState
-    newState.routes.splice(index - 1, 1)
-    newState.index--
-     */
-    
-  }
-  return newState
-}
-/*
-const mathOperatorReducer = function (state = defaultCounter, action) {
+const mathOperatorReducer = function (state = {counter: 0}, action) {
   switch(action.type) {
     case 'INCR_COUNTER':
        let newObj = {
-         counter: this.state.counter++
+         counter: state.counter++
        }
        return newObj
     default:
        return state
     }
 }
-*/
 
-const reducer = combineReducers({navReducer})
+const reducer = combineReducers({
+  nav: navReducer,
+  counter : mathOperatorReducer
+})
+
+const middleware = createReactNavigationReduxMiddleware(
+  "root",
+  state => state.nav,
+)
 
 export const store = createStore(
   reducer,
-  applyMiddleware(logger)
+  applyMiddleware(middleware, logger)
 )
