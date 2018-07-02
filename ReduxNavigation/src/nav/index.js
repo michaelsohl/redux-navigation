@@ -10,17 +10,3 @@ export default createStackNavigator({
 {
   initialRouteName: 'Sa'
 })
-
-/** 
-export default class Nav extends Component {
-  render() {
-    console.log('navigator state:', this.props.state)
-    return(
-      <Navigator navigation={addNavigationHelpers({
-        dispatch: this.props.dispatch,
-        state: this.props.navigation,
-      })}/>
-    )
-  }
-}
-*/

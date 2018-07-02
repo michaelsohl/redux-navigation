@@ -17,13 +17,13 @@ import {
 } from 'react-navigation-redux-helpers'
 import { connect } from 'react-redux'
 import { Provider } from 'react-redux'
-import logger from 'redux-logger'
+// import logger from 'redux-logger'
 import { store } from './redux'
 
 const NavApp = reduxifyNavigator(AppNavigator, "root")
 
 const mapStateToProps = (state) => ({
-  state: state.nav,
+  state: state.nav
 })
 
 const AppWithNavigationState = connect(mapStateToProps)(NavApp)
