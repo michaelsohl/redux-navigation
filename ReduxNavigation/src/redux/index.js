@@ -16,10 +16,11 @@ import { logger } from 'redux-logger'
 const navReducer = createNavigationReducer(AppNavigator)
 
 const mathOperatorReducer = function (state = {counter: 0}, action) {
+  console.log('state:', state)
   switch(action.type) {
     case 'INCR_COUNTER':
        let newObj = {
-         counter: state.counter++
+         counter: state.counter + 1
        }
        return newObj
     default:

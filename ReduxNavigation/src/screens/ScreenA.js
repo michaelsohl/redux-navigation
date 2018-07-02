@@ -16,19 +16,18 @@ class ScreenA extends Component {
   }
 
   render(){
-    console.log('ScreenA')
+    console.log('ScreenA:', this.props)
      const { onPress, counter } = this.props
+
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'green'}} >
-        <Button onPress={ onPress } style={{height: 100, width: 200}} title={`${counter}`} color='#C21807'/>
+        <Button onPress={ (counter == 3) ? this._onPress : onPress } style={{height: 100, width: 200}} title={`${counter}`} color='#C21807'/>
       </View>
     )
   }
 }
 const mapStateToProps = (state) => {
-  return {
-    counter: state.counter
-  }
+  return state.counter
 }
 
 const mapDispatchToProps = (dispatch) => {
